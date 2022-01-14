@@ -17,7 +17,7 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 const appRoutes: Routes = [
   {path: '', component: AppComponent},
   {path: 'cart', component: ShoppingCartComponent},
-  {path: 'product', component: ProductDetailsComponent}
+  {path: 'product/:productId', component: ProductDetailsComponent}
 ]
 
 @NgModule({

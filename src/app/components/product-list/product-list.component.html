@@ -1,10 +1,11 @@
-<div class="product-list" *ngFor="let product of products" routerLink="/product">
+<div class="product-list" *ngFor="let product of products" [routerLink]="['/product', product.id]">
     <mat-card class="product-list__book">
         <img src="{{product.imgPath}}" mat-card-image>  
         <div class="product-list__book__heading">
             <mat-card-title>{{ product.name }}</mat-card-title>
             <mat-card-title>${{ product.price }}</mat-card-title>
         </div>
-        <mat-card-content>{{ product.description }}</mat-card-content>
+        <mat-card-content *ngIf="product.description.length<=50">{{ product.description }}...</mat-card-content>
+        <mat-card-content *ngIf="product.description.length>50">{{ product.description.substr(0, 50) }}...</mat-card-content>
     </mat-card>
 </div>

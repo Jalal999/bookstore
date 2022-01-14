@@ -6,11 +6,6 @@ import { products } from '../../products';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.less']
 })
-export class ProductListComponent implements OnInit {
-  products = products;
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class ProductListComponent {
+  public products = products;
 }

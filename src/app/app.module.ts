@@ -12,6 +12,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductListComponent } from './components/product-list/product-list.component';
+import { TruncatePipe } from './truncate.pipe';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
 const appRoutes: Routes = [
@@ -25,6 +26,7 @@ const appRoutes: Routes = [
     AppComponent,
     NavbarComponent,
     ProductListComponent,
+    TruncatePipe,
     ProductDetailsComponent
   ],
   imports: [

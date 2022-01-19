@@ -8,7 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { NgxStarRatingModule } from 'ngx-star-rating';
 import { MatSliderModule } from '@angular/material/slider';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -19,9 +19,9 @@ import { TruncatePipe } from './truncate.pipe';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
 const appRoutes: Routes = [
-  {path: '', component: ProductListComponent},
-  {path: 'cart', component: ShoppingCartComponent},
-  {path: 'product/:productId', component: ProductDetailsComponent}
+  { path: '', component: ProductListComponent },
+  { path: 'cart', component: ShoppingCartComponent },
+  { path: 'product/:productId', component: ProductDetailsComponent }
 ]
 
 @NgModule({

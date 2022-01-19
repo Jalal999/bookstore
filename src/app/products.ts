@@ -2,8 +2,8 @@ export interface Product {
     id: number;
     name: string;
     price: number;
-    description: string;
-    imgPath: string;
+    description?: string;
+    imgPath?: string;
   }
   
   export const products = [

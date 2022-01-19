@@ -6,6 +6,9 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule, Routes } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
+import { NgxStarRatingModule } from 'ngx-star-rating';
+import { MatSliderModule } from '@angular/material/slider';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -16,7 +19,7 @@ import { TruncatePipe } from './truncate.pipe';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
 const appRoutes: Routes = [
-  {path: '', component: AppComponent},
+  {path: '', component: ProductListComponent},
   {path: 'cart', component: ShoppingCartComponent},
   {path: 'product/:productId', component: ProductDetailsComponent}
 ]
@@ -37,7 +40,10 @@ const appRoutes: Routes = [
     MatBadgeModule,
     MatButtonModule,
     RouterModule.forRoot(appRoutes),
-    MatCardModule
+    MatCardModule,
+    NgxStarRatingModule,
+    MatSliderModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]

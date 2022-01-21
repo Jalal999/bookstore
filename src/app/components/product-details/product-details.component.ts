@@ -9,9 +9,8 @@ import { CartService } from '../shopping-cart/cart.service';
   styleUrls: ['./product-details.component.less']
 })
 export class ProductDetailsComponent implements OnInit {
-  product?: Product;
+  public product?: Product;
   
-
   constructor(private route: ActivatedRoute, private cartService: CartService) { }
 
   ngOnInit(): void {
@@ -19,7 +18,7 @@ export class ProductDetailsComponent implements OnInit {
     this.product = products.find(product => product.id === productIdFromRoute);
   }
 
-  addToCart(product: Product): void {
+  public addToCart(product: Product): void {
     this.cartService.addToCart(product);
   }
 }

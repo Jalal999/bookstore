@@ -9,6 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { NgxStarRatingModule } from 'ngx-star-rating';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -17,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { TruncatePipe } from './truncate.pipe';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { AddCartDialogComponent } from './components/product-details/add-cart-dialog/add-cart-dialog.component';
 
 const appRoutes: Routes = [
   { path: '', component: ProductListComponent },
@@ -30,7 +32,8 @@ const appRoutes: Routes = [
     NavbarComponent,
     ProductListComponent,
     TruncatePipe,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    AddCartDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ const appRoutes: Routes = [
     MatCardModule,
     NgxStarRatingModule,
     MatSliderModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

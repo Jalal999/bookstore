@@ -1,0 +1,43 @@
+.shopping-cart {
+    padding: 15px;
+
+    &__item {
+        margin-bottom: 5px;
+
+        &__image {
+            float: left;
+        }
+
+        &__heading {
+
+            & mat-card-title-group {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            & form {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
+        mat-card-title {
+            margin-left: 5px;
+        }
+
+        &__name {
+            margin-top: 5px !important;
+        }
+
+        &__price {
+            margin-top: 55px !important;
+        }
+
+        & input {
+            margin-top: 55px;
+            width: 55px;
+        }
+    }
+}

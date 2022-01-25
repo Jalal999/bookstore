@@ -1,1 +1,17 @@
-<p>shopping-cart works!</p>
+<div class="shopping-cart">
+  <mat-card *ngFor = "let item of items" class="shopping-cart__item">
+    <img mat-card-md-image src={{item.productImg}} class="shopping-cart__item__image" >
+    <div class="shopping-cart__item__heading">
+      <mat-card-title-group>
+        <mat-card-title class="shopping-cart__item__name">{{ item.productName }}</mat-card-title>
+        <mat-icon  (click)=deleteItem(item.productId)>close</mat-icon>
+      </mat-card-title-group>
+      <form>
+        <mat-card-title class="shopping-cart__item__price">${{ item.productPrice }}</mat-card-title>
+        <input matInput type="number" name="amount" ngModel>
+      </form>
+    </div>
+  </mat-card>
+
+</div>
+

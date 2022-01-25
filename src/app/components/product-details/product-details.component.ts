@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product, products } from '../../products';
-import { CartService } from '../shopping-cart/cart.service';
+import { CartService } from '../../services/cart-service/cart.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCartDialogComponent } from './add-cart-dialog/add-cart-dialog.component';
 
@@ -20,8 +20,12 @@ export class ProductDetailsComponent implements OnInit {
     this.product = products.find(product => product.id === productIdFromRoute);
   }
 
-  public addToCart(product: Product): void {
-    this.cartService.addToCart(product);
+  public addToCart(product: Product, value: number): void {
+    this.cartService.addToCart(product, value);
     this.addCartDialog.open(AddCartDialogComponent);
+  }
+
+  onSubmit() {
+    
   }
 }

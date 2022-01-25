@@ -3,22 +3,25 @@
         <mat-card-title>{{ product.name }}</mat-card-title>
         <img src="{{product.imgPath}}" mat-card-image> 
         <mat-card-content>{{ product.description }}</mat-card-content>
-        <mat-card class="product-details__book__heading">
-            <div class="product-details__book__heading__amount">
-                <mat-card-subtitle>Amount:</mat-card-subtitle>
-                <input matInput type="number">
-            </div>
-            <div class="product-details__book__heading__price">
-                <mat-card-title>${{ product.price }}</mat-card-title>
-                <div>
-                    <mat-icon class="material-icons-outlined">star</mat-icon>
-                    <mat-icon class="material-icons-outlined">star</mat-icon>                    
-                    <mat-icon class="material-icons-outlined">star</mat-icon>
-                    <mat-icon class="material-icons-outlined">star_border</mat-icon>
-                    <mat-icon class="material-icons-outlined">star_border</mat-icon>
+        <form #productAmount="ngForm" (ngSubmit)="addToCart(product, productAmount.value.amount)">
+            <mat-card class="product-details__book__heading">
+                <div class="product-details__book__heading__amount">
+                        {{ productAmount.value | json }}
+                        <mat-card-subtitle>Amount:</mat-card-subtitle>
+                        <input matInput type="number" min="0" name="amount" ngModel>
                 </div>
-            </div>
-        </mat-card> 
-        <button mat-raised-button color="primary" class="product-details__book__btn" (click)="addToCart(product)">Add To Cart</button>
+                <div class="product-details__book__heading__price">
+                    <mat-card-title>${{ product.price }}</mat-card-title>
+                    <div>
+                        <mat-icon class="material-icons-outlined">star</mat-icon>
+                        <mat-icon class="material-icons-outlined">star</mat-icon>                    
+                        <mat-icon class="material-icons-outlined">star</mat-icon>
+                        <mat-icon class="material-icons-outlined">star_border</mat-icon>
+                        <mat-icon class="material-icons-outlined">star_border</mat-icon>
+                    </div>
+                </div>
+            </mat-card> 
+            <button mat-raised-button color="primary" class="product-details__book__btn" type="submit">Add To Cart</button>
+        </form>
     </mat-card>
 </div>

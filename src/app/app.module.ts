@@ -8,6 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { NgxStarRatingModule } from 'ngx-star-rating';
 import { MatSliderModule } from '@angular/material/slider';
+import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 
@@ -33,7 +34,8 @@ const appRoutes: Routes = [
     ProductListComponent,
     TruncatePipe,
     ProductDetailsComponent,
-    AddCartDialogComponent
+    AddCartDialogComponent,
+    ShoppingCartComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +48,7 @@ const appRoutes: Routes = [
     MatCardModule,
     NgxStarRatingModule,
     MatSliderModule,
+    FormsModule,
     MatFormFieldModule,
     MatDialogModule
   ],

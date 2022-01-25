@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CartService } from '../../services/cart-service/cart.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -6,6 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./shopping-cart.component.less']
 })
 export class ShoppingCartComponent {
-//TO DO
-// In this view, the products chosen and added by a user into cart will be shown.
+
+  constructor(private cartService: CartService) { }
+
+  public items = this.cartService.getItems();
+
+  public deleteItem(productId: number){
+    this.cartService.deleteItem(productId);
+  }
 }

@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./shopping-cart.component.less']
 })
 export class ShoppingCartComponent {
-
+//TO DO
+// In this view, the products chosen and added by a user into cart will be shown.
 }

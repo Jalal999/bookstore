@@ -13,14 +13,19 @@
 
             &__amount {
                 
+                & label {
+                    display: block;
+                    font-size: 20px;
+                }
+
                 & input {
                     width: 55px;
                     margin-top: 5px;
+                }
 
-                    &::-webkit-inner-spin-button {
-                        opacity: 1
-                    }
-                    
+                & input[type="number"]::-webkit-inner-spin-button,
+                & input[type="number"]::-webkit-outer-spin-button {
+                    opacity: 1;
                 }
             }
         }

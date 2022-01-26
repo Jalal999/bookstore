@@ -3,12 +3,10 @@
         <mat-card-title>{{ product.name }}</mat-card-title>
         <img src="{{product.imgPath}}" mat-card-image> 
         <mat-card-content>{{ product.description }}</mat-card-content>
-        <form #productAmount="ngForm" (ngSubmit)="addToCart(product, productAmount.value.amount)">
-            <mat-card class="product-details__book__heading">
+        <mat-card class="product-details__book__heading">
                 <div class="product-details__book__heading__amount">
-                        {{ productAmount.value | json }}
-                        <mat-card-subtitle>Amount:</mat-card-subtitle>
-                        <input matInput type="number" min="0" name="amount" ngModel>
+                    <label for="amount">Amount:</label>
+                    <input matInput type="number" min="0" id="amount" [formControl]="amount">
                 </div>
                 <div class="product-details__book__heading__price">
                     <mat-card-title>${{ product.price }}</mat-card-title>
@@ -20,8 +18,7 @@
                         <mat-icon class="material-icons-outlined">star_border</mat-icon>
                     </div>
                 </div>
-            </mat-card> 
-            <button mat-raised-button color="primary" class="product-details__book__btn" type="submit">Add To Cart</button>
-        </form>
+        </mat-card> 
     </mat-card>
+    <button mat-raised-button color="primary" class="product-details__book__btn" (click)="addToCart()">Add To Cart</button>
 </div>

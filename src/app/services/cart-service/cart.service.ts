@@ -16,6 +16,7 @@ interface CartItemType {
 })
 export class CartService {
   private cartItems?: CartItemType[] = [];
+  private totalCost: number = 0;
 
   constructor() { }
 
@@ -41,7 +42,6 @@ export class CartService {
         productCnt: value
       });
     }
-    console.log(this.cartItems);
   }
 
   public getItems(): CartItemType[] {
@@ -59,7 +59,14 @@ export class CartService {
         this.cartItems!.splice(index, productId);
       }
     }); 
-    console.log(this.cartItems)
+  }
+
+  public getTotalCost(): number {
+    this.totalCost = 0;
+    this.cartItems!.forEach((element) => {
+      this.totalCost += element.productCnt*element.productPrice;
+    })
+    return this.totalCost;
   }
 
 }

@@ -4,6 +4,7 @@ import { Product, products } from '../../products';
 import { CartService } from '../../services/cart-service/cart.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCartDialogComponent } from './add-cart-dialog/add-cart-dialog.component';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-product-details',
@@ -12,6 +13,7 @@ import { AddCartDialogComponent } from './add-cart-dialog/add-cart-dialog.compon
 })
 export class ProductDetailsComponent implements OnInit {
   public product?: Product;
+  public amount = new FormControl('');
   
   constructor(private route: ActivatedRoute, private cartService: CartService, public addCartDialog: MatDialog) { }
 
@@ -20,12 +22,8 @@ export class ProductDetailsComponent implements OnInit {
     this.product = products.find(product => product.id === productIdFromRoute);
   }
 
-  public addToCart(product: Product, value: number): void {
-    this.cartService.addToCart(product, value);
+  public addToCart(): void {
+    this.cartService.addToCart(this.product!, this.amount.value);
     this.addCartDialog.open(AddCartDialogComponent);
-  }
-
-  onSubmit() {
-    
   }
 }

@@ -1,3 +1,4 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component } from '@angular/core';
 import { CartService } from '../../services/cart-service/cart.service';
 
@@ -11,8 +12,9 @@ export class ShoppingCartComponent {
   constructor(private cartService: CartService) { }
 
   public items = this.cartService.getItems();
+  public totalCost = this.cartService.getTotalCost();
 
-  public deleteItem(productId: number){
+  public deleteItem(productId: number): void {
     this.cartService.deleteItem(productId);
   }
 }

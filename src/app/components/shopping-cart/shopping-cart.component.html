@@ -8,10 +8,15 @@
       </mat-card-title-group>
       <form>
         <mat-card-title class="shopping-cart__item__price">${{ item.productPrice }}</mat-card-title>
-        <input matInput type="number" name="amount" ngModel>
+        <input matInput type="number" min="1" id="amount" name="amount" [(ngModel)]="item.productCnt">
       </form>
     </div>
   </mat-card>
-
+  <mat-divider></mat-divider>
+  <mat-card>
+    <mat-card-subtitle>Total cost:</mat-card-subtitle>
+    <mat-card-title>${{ totalCost }}</mat-card-title>
+  </mat-card>
+  <button mat-raised-button color="primary">Checkout</button>
 </div>
 

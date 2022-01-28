@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { empty } from 'rxjs';
 import { Product } from '../../products';
 
 interface CartItemType {
@@ -25,7 +24,6 @@ export class CartService {
 
     for (let i=0; i < this.cartItems!.length; i++) {
       if (this.cartItems![i].productId === product.id) {
-        console.log(this.cartItems![i].productId + " " + product.id)
         this.cartItems![i].productCnt += value;
         productInCart = true;
         break;
@@ -69,4 +67,11 @@ export class CartService {
     return this.totalCost;
   }
 
+  public updateCart(id: number, count: number): void {
+    this.cartItems!.forEach((element) => {
+      if (element.productId === id) {
+        element.productCnt = count;
+      }
+    })
+  }
 }

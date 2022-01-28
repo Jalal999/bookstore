@@ -22,11 +22,13 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { TruncatePipe } from './truncate.pipe';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { AddCartDialogComponent } from './components/product-details/add-cart-dialog/add-cart-dialog.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 const appRoutes: Routes = [
   { path: '', component: ProductListComponent },
   { path: 'cart', component: ShoppingCartComponent },
-  { path: 'product/:productId', component: ProductDetailsComponent }
+  { path: 'product/:productId', component: ProductDetailsComponent },
+  { path: 'checkout', component: CheckoutComponent }
 ]
 
 @NgModule({
@@ -37,7 +39,8 @@ const appRoutes: Routes = [
     TruncatePipe,
     ProductDetailsComponent,
     AddCartDialogComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,

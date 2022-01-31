@@ -24,7 +24,6 @@ export class ShoppingCartComponent {
   }
 
   public isCartNotEmpty(): boolean {
-    if(this.items.length > 0) return true;
-    else return false;
+    return this.items.length > 0 ? true : false
   }
 }

@@ -22,4 +22,9 @@ export class ShoppingCartComponent {
     this.cartService.updateCart(productId, productCount);
     this.totalCost = this.cartService.getTotalCost(); 
   }
+
+  public isCartNotEmpty(): boolean {
+    if(this.items.length > 0) return true;
+    else return false;
+  }
 }

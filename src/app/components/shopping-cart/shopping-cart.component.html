@@ -1,4 +1,4 @@
-<div class="shopping-cart" *ngIf = "items.length > 0; else emptyCart">
+<div class="shopping-cart" *ngIf = "isCartNotEmpty(); else emptyCart">
   <mat-card *ngFor = "let item of items" class="shopping-cart__item">
     <img mat-card-md-image src={{item.productImg}} class="shopping-cart__item__image" >
     <div class="shopping-cart__item__heading">

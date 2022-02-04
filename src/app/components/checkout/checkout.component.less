@@ -1,0 +1,61 @@
+.checkout {
+    padding: 15px;
+
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 5px 0;
+
+        &__heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    &__total {
+        text-align: center;
+        margin: 20px 0;
+
+        & span {
+            font-size: 24px;
+        }
+
+        & mat-card-title {
+            display: inline-block;
+        }
+    }
+
+    &__form {
+        
+        mat-form-field {
+            width: 100%;
+    
+            & input {
+                background-color: white;
+                height: auto;
+                margin-top: 10px;
+            }
+
+            ::ng-deep .mat-form-field-flex {
+                padding: 0 !important;
+                border: 2px solid;
+            }
+            
+            ::ng-deep .mat-form-field-prefix {
+                padding: 5px 5px !important;
+            }
+            
+            ::ng-deep .mat-form-field-infix {
+                padding: 5px 5px !important;
+                border: 0;
+                background: white;
+            }
+        }
+
+        & button {
+            width: 100%;
+        }
+    }
+}

@@ -1,1 +1,32 @@
-<p>checkout works!</p>
+<div class="checkout">
+    <mat-card *ngFor = "let item of items" class="checkout__item">
+        <div class="checkout__item__heading">
+            <img mat-card-sm-image src={{item.productImg}} class="shopping-cart__item__image">
+            <mat-card-title>{{ item.productName }}</mat-card-title>
+        </div>
+        <mat-card-title class="checkout__item__price">${{ item.productPrice }}</mat-card-title>
+    </mat-card>
+    <div class="checkout__total">
+        <span>Total cost: </span>
+        <mat-card-title>${{ totalCost }}</mat-card-title>
+    </div>
+    <mat-divider></mat-divider>
+
+    <form [formGroup]="checkout"  class="checkout__form" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill">
+            <span matPrefix>email:</span>
+            <input matInput type="text" formControlName="email" required>
+            <mat-error *ngIf="checkout.hasError('email', 'email')">Your email is not valid!</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <span matPrefix>confirm email:</span>
+            <input matInput type="text" formControlName="confirmEmail" required>
+            <mat-error *ngIf="checkout.hasError('email', 'confirmEmail') || checkout.controls['confirmEmail'].hasError('mismatch')">Emails do NOT match!!</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <span matPrefix>name/surname:</span>
+            <input matInput type="text" formControlName="nameSurname" required>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" [disabled]="!checkout.valid">Order</button>
+    </form>
+</div>

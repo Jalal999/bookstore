@@ -8,8 +8,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { NgxStarRatingModule } from 'ngx-star-rating';
 import { MatSliderModule } from '@angular/material/slider';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
+
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -19,11 +22,13 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { TruncatePipe } from './truncate.pipe';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { AddCartDialogComponent } from './components/product-details/add-cart-dialog/add-cart-dialog.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 const appRoutes: Routes = [
   { path: '', component: ProductListComponent },
   { path: 'cart', component: ShoppingCartComponent },
-  { path: 'product/:productId', component: ProductDetailsComponent }
+  { path: 'product/:productId', component: ProductDetailsComponent },
+  { path: 'checkout', component: CheckoutComponent }
 ]
 
 @NgModule({
@@ -33,7 +38,9 @@ const appRoutes: Routes = [
     ProductListComponent,
     TruncatePipe,
     ProductDetailsComponent,
-    AddCartDialogComponent
+    AddCartDialogComponent,
+    ShoppingCartComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
@@ -46,8 +53,11 @@ const appRoutes: Routes = [
     MatCardModule,
     NgxStarRatingModule,
     MatSliderModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatFormFieldModule,
-    MatDialogModule
+    MatDialogModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

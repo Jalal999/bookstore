@@ -46,7 +46,7 @@ export class CartService {
     return this.cartItems!;
   }
 
-  protected clearCart(): CartItemType[] {
+  public clearCart(): CartItemType[] {
     this.cartItems = [];
     return this.cartItems;
   }

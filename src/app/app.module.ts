@@ -12,7 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
-
+import { MatInputModule } from '@angular/material/input';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -23,6 +23,7 @@ import { TruncatePipe } from './truncate.pipe';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { AddCartDialogComponent } from './components/product-details/add-cart-dialog/add-cart-dialog.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { ThankDialogComponent } from './components/checkout/thank-dialog/thank-dialog.component';
 
 const appRoutes: Routes = [
   { path: '', component: ProductListComponent },
@@ -40,7 +41,8 @@ const appRoutes: Routes = [
     ProductDetailsComponent,
     AddCartDialogComponent,
     ShoppingCartComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    ThankDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,8 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     MatFormFieldModule,
     MatDialogModule,
-    MatDividerModule
+    MatDividerModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

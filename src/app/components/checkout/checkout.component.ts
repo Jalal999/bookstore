@@ -15,17 +15,17 @@ export class CheckoutComponent {
   private emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]+$/;
 
   constructor(private cartService: CartService, public thankDialog: MatDialog) { }
-  
+
   checkoutForm = new FormGroup({
     email: new FormControl('', Validators.pattern(this.emailRegex)),
     confirmEmail: new FormControl('', Validators.required),
     nameSurname: new FormControl('', Validators.pattern("^([a-zA-Z]{2,}\\s[a-zA-Z]{1,}'?-?[a-zA-Z]{1,}\\s?([a-zA-Z]{1,})?)"))
-  }, {validators: this.validateConfirmEmail });
+  }, { validators: this.validateConfirmEmail });
 
   private validateConfirmEmail(ac: AbstractControl): Validators | null {
-    if(ac.value['email'] === ac.value['confirmEmail']) {
+    if (ac.value['email'] === ac.value['confirmEmail']) {
       ac.get('confirmEmail')?.setErrors(null);
-    } 
+    }
     else {
       ac.get('confirmEmail')?.setErrors({ 'mismatch': true });
     }
@@ -36,4 +36,12 @@ export class CheckoutComponent {
     this.items = this.cartService.clearCart();
     this.thankDialog.open(ThankDialogComponent);
   };
+
+  public hasError(errorKey: string): boolean {
+    if (this.checkoutForm.controls['email'].hasError(errorKey) ||
+      this.checkoutForm.controls['confirmEmail'].hasError(errorKey) ||
+      this.checkoutForm.controls['nameSurname'].hasError(errorKey)) {
+        return true;
+    } else return false;
+  }
 }

@@ -12,20 +12,21 @@
     </div>
     <mat-divider></mat-divider>
 
-    <form [formGroup]="checkoutForm"  class="checkout__form" (ngSubmit)="onSubmit()">
+    <form [formGroup]="checkoutForm"  class="checkout__form">
         <mat-form-field appearance="fill">
             <span matPrefix>email:</span>
             <input matInput type="text" formControlName="email" required>
-            <mat-error *ngIf="checkoutForm.controls['email'].hasError('pattern')">Your email is not valid!</mat-error>
+            <mat-error *ngIf="hasError('pattern')">Your email is not valid!</mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill">
             <span matPrefix>confirm email:</span>
             <input matInput type="text" formControlName="confirmEmail" required>
-            <mat-error *ngIf="checkoutForm.controls['confirmEmail'].hasError('mismatch')">Emails do NOT match!!</mat-error>
+            <mat-error *ngIf="hasError('mismatch')">Emails do NOT match!!</mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill">
             <span matPrefix>name/surname:</span>
             <input matInput type="text" formControlName="nameSurname" required>
+            <mat-error *ngIf="hasError('pattern')">Put valid name and surname (at least two words)!!!</mat-error>
         </mat-form-field>
         <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" [disabled]="!checkoutForm.valid">Order</button>
     </form>

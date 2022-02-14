@@ -1,24 +1,26 @@
 <div class="product-details" *ngIf="product">
     <mat-card class="product-details__book">
         <mat-card-title>{{ product.name }}</mat-card-title>
-        <img src="{{product.imgPath}}" mat-card-image> 
+        <img src="{{product.imgPath}}" alt="{{product.imgAlt}}" mat-card-image>
         <mat-card-content>{{ product.description }}</mat-card-content>
         <mat-card class="product-details__book__heading">
-                <div class="product-details__book__heading__amount">
-                    <label for="amount">Amount:</label>
-                    <input matInput type="number" min="0" id="amount" [formControl]="amount">
+            <div class="product-details__book__heading__amount">
+                <label for="amount">Amount:</label>
+                <input matInput type="number" min="1" id="amount" [formControl]="amount"
+                    oninput="validity.valid||(value='');">
+            </div>
+            <div class="product-details__book__heading__price">
+                <mat-card-title>${{ product.price }}</mat-card-title>
+                <div>
+                    <mat-icon class="material-icons-outlined">star</mat-icon>
+                    <mat-icon class="material-icons-outlined">star</mat-icon>
+                    <mat-icon class="material-icons-outlined">star</mat-icon>
+                    <mat-icon class="material-icons-outlined">star_border</mat-icon>
+                    <mat-icon class="material-icons-outlined">star_border</mat-icon>
                 </div>
-                <div class="product-details__book__heading__price">
-                    <mat-card-title>${{ product.price }}</mat-card-title>
-                    <div>
-                        <mat-icon class="material-icons-outlined">star</mat-icon>
-                        <mat-icon class="material-icons-outlined">star</mat-icon>                    
-                        <mat-icon class="material-icons-outlined">star</mat-icon>
-                        <mat-icon class="material-icons-outlined">star_border</mat-icon>
-                        <mat-icon class="material-icons-outlined">star_border</mat-icon>
-                    </div>
-                </div>
-        </mat-card> 
+            </div>
+        </mat-card>
     </mat-card>
-    <button mat-raised-button color="primary" class="product-details__book__btn" (click)="addToCart()">Add To Cart</button>
+    <button mat-raised-button color="primary" class="product-details__book__btn" (click)="addToCart()">Add To
+        Cart</button>
 </div>

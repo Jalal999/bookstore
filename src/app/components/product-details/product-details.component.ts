@@ -13,7 +13,7 @@ import { FormControl } from '@angular/forms';
 })
 export class ProductDetailsComponent implements OnInit {
   public product?: Product;
-  public amount = new FormControl('');
+  public amount = new FormControl('1');
   
   constructor(private route: ActivatedRoute, private cartService: CartService, public addCartDialog: MatDialog) { }
 

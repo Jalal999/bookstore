@@ -32,7 +32,7 @@ export class CartService {
     }
 
     if (!productInCart) {
-      if (value == 0) {
+      if (value === 0) {
         value = 1;
       }
       this.cartItems?.push({

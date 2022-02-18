@@ -1,7 +1,7 @@
 <div class="checkout">
     <mat-card *ngFor = "let item of items" class="checkout__item">
         <div class="checkout__item__heading">
-            <img mat-card-sm-image src={{item.productImg}} class="shopping-cart__item__image">
+            <img mat-card-sm-image src={{item.productImg}} alt={{item.productImgAlt}} class="shopping-cart__item__image">
             <mat-card-title>{{ item.productName }}</mat-card-title>
         </div>
         <mat-card-title class="checkout__item__price">${{ item.productPrice }}</mat-card-title>

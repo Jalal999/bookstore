@@ -33,8 +33,9 @@ export class CheckoutComponent {
   }
 
   public onSubmit() {
-    this.items = this.cartService.clearCart();
+    console.log(this.items);
     this.thankDialog.open(ThankDialogComponent);
+    this.items = this.cartService.clearCart();
   };
 
   public hasError(errorKey: string): boolean {

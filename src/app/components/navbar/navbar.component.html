@@ -1,8 +1,13 @@
 <mat-toolbar class="nav-bar">
-    <h3 routerLink="">BookStore</h3>
+    <div class="nav-bar__logo">
+        <button *ngIf="!isOnHomepage()" (click)="goBack()">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+        <h3 routerLink="">{{ logoName }}</h3>
+    </div>
     <div class="nav-bar__icons">
-        <mat-icon class="nav-bar__icons__cart"  mat-raised-button matBadge="4" matBadgeOverlap="false" routerLink="/cart">shopping_cart</mat-icon>
+        <mat-icon class="nav-bar__icons__cart" mat-raised-button matBadgeOverlap="false" routerLink="/cart">
+            shopping_cart</mat-icon>
         <mat-icon class="nav-bar__icons__hamburger">reorder</mat-icon>
     </div>
 </mat-toolbar>
-

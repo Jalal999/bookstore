@@ -7,6 +7,7 @@ interface CartItemType {
   productPrice: number, 
   productDesc: string,
   productImg?: string,
+  productImgAlt?: string,
   productCnt: number
 }
 
@@ -31,12 +32,16 @@ export class CartService {
     }
 
     if (!productInCart) {
+      if (value === 0) {
+        value = 1;
+      }
       this.cartItems?.push({
         productId: product.id,
         productName: product.name,
         productPrice: product.price,
         productDesc: product.description!,
         productImg: product.imgPath,
+        productImgAlt: product.imgAlt,
         productCnt: value
       });
     }
@@ -54,7 +59,7 @@ export class CartService {
   public deleteItem(productId: number): void {
     this.cartItems!.forEach((element, index) => {
       if(element.productId === productId) {
-        this.cartItems!.splice(index, productId);
+        this.cartItems!.splice(index, 1);
       }
     }); 
   }

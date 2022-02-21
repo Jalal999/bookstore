@@ -11,14 +11,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TruncatePipe } from './truncate.pipe';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    // TruncatePipe,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +27,7 @@ import { TruncatePipe } from './truncate.pipe';
     NgxStarRatingModule,
     MatSliderModule,
     MatInputModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

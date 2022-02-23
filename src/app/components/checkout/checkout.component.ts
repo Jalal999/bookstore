@@ -3,6 +3,8 @@ import { CartService } from '../../services/cart-service/cart.service';
 import { FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ThankDialogComponent } from './thank-dialog/thank-dialog.component';
+import { OrderService } from 'src/app/services/order-service/order.service';
+import { CartItemType } from '../../services/cart-service/cart.service';
 
 @Component({
   selector: 'app-checkout',
@@ -14,7 +16,9 @@ export class CheckoutComponent {
   public totalCost = this.cartService.getTotalCost();
   private emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]+$/;
 
-  constructor(private cartService: CartService, public thankDialog: MatDialog) { }
+  private orders: CartItemType[] = this.items;
+
+  constructor(private cartService: CartService, public thankDialog: MatDialog, private orderService: OrderService) { }
 
   checkoutForm = new FormGroup({
     email: new FormControl('', Validators.pattern(this.emailRegex)),
@@ -33,7 +37,7 @@ export class CheckoutComponent {
   }
 
   public onSubmit() {
-    console.log(this.items);
+    this.orderService.saveOrder(this.items);
     this.thankDialog.open(ThankDialogComponent);
     this.items = this.cartService.clearCart();
   };

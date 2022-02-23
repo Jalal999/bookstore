@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../../products';
 
-interface CartItemType {
+export type CartItemType = {
   productId: number,
   productName: string,
   productPrice: number, 

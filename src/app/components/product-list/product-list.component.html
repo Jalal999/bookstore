@@ -1,4 +1,4 @@
-<div class="product-list" *ngFor="let product of products" [routerLink]="['/product', product.id]">
+<div class="product-list" *ngFor="let product of products" [routerLink]="['/products', product.id]">
     <mat-card class="product-list__book">
         <img src="{{product.imgPath}}" alt="{{product.imgAlt}}" mat-card-image>  
         <div class="product-list__book__heading">

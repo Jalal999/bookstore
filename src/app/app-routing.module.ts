@@ -11,7 +11,7 @@ const routes: Routes = [
     { path: '', loadChildren: () => import('./components/product-list/product-list.module').then(m => m.ProductListModule) },
     { path: 'cart', loadChildren: () => import('./components/shopping-cart/shopping-cart.module').then(m => m.ShoppingCartModule) },
     { path: 'checkout', loadChildren: () => import('./components/checkout/checkout.module').then(m => m.CheckoutModule) },
-    { path: 'product/:productId', loadChildren: () => import('./components/product-details/product-details.module').then(m => m.ProductDetailsModule) },
+    { path: 'products/:productId', loadChildren: () => import('./components/product-details/product-details.module').then(m => m.ProductDetailsModule) },
 ];
 
 @NgModule({

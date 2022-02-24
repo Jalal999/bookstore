@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { products } from '../../products';
+import { Product } from '../../products';
+import { ProductService } from 'src/app/services/product-service/product.service';
 
 @Component({
   selector: 'app-product-list',
@@ -7,5 +8,16 @@ import { products } from '../../products';
   styleUrls: ['./product-list.component.less']
 })
 export class ProductListComponent {
-  public products = products;
+  public products: Product[] = [];
+
+  constructor(private productService: ProductService) { }
+
+  ngOnInit(): void {
+    this.getProducts();
+  }
+
+  private getProducts(): void {
+    this.productService.getProducts()
+        .subscribe(products => this.products = products);
+  }
 }

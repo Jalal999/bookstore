@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Product, products } from '../../products';
+import { Product } from '../../products';
 import { CartService } from '../../services/cart-service/cart.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCartDialogComponent } from './add-cart-dialog/add-cart-dialog.component';

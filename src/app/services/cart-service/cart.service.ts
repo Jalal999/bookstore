@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../../products';
+import { Store } from '@ngrx/store';
+import { CartItemState } from 'src/app/components/product-details/state/product.state';
+import { addProduct } from 'src/app/components/product-details/state/product.actions';
+import { CartItemModel } from 'src/app/components/product-details/state/product.model';
 
 export type CartItemType = {
   productId: number,
@@ -18,33 +22,35 @@ export class CartService {
   private cartItems?: CartItemType[] = [];
   private totalCost: number = 0;
 
-  constructor() { }
+  constructor(private store: Store<CartItemState>) { }
 
   public addToCart(product: Product, value: number): void {
-    let productInCart = false;
+    // let productInCart = false;
 
-    for (let i=0; i < this.cartItems!.length; i++) {
-      if (this.cartItems![i].productId === product.id) {
-        this.cartItems![i].productCnt += value;
-        productInCart = true;
-        break;
-      }
-    }
+    // for (let i=0; i < this.cartItems!.length; i++) {
+    //   if (this.cartItems![i].productId === product.id) {
+    //     this.cartItems![i].productCnt += value;
+    //     productInCart = true;
+    //     break;
+    //   }
+    // }
 
-    if (!productInCart) {
-      if (value === 0) {
-        value = 1;
-      }
-      this.cartItems?.push({
-        productId: product.id,
-        productName: product.name,
-        productPrice: product.price,
-        productDesc: product.description!,
-        productImg: product.imgPath,
-        productImgAlt: product.imgAlt,
-        productCnt: value
-      });
-    }
+    // if (!productInCart) {
+    //   if (value === 0) {
+    //     value = 1;
+    //   }
+    //   this.cartItems?.push({
+    //     productId: product.id,
+    //     productName: product.name,
+    //     productPrice: product.price,
+    //     productDesc: product.description!,
+    //     productImg: product.imgPath,
+    //     productImgAlt: product.imgAlt,
+    //     productCnt: value
+    //   });
+    // }
+    const item: CartItemModel = product;
+    this.store.dispatch(addProduct({item}))
   }
 
   public getItems(): CartItemType[] {

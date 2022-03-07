@@ -1,12 +1,15 @@
 import { ProductListState } from "../components/product-list/state/product-list.state";
 
 import { productReducer } from "../components/product-list/state/product-list.reducer";
+import { CartState } from "../components/shopping-cart/state/cart.state";
+import { collectionReducer } from "../components/shopping-cart/state/cart.reducer";
 
 export interface AppState {
-    ProductListState: ProductListState
-    // cartItem: CartItemModel[];
+    ProductListState: ProductListState,
+    CartState: CartState
 }
 
 export const AppReducer = {
-    product: productReducer
+    product: productReducer,
+    items: collectionReducer
 }

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
+import { AppState } from 'src/app/state/app.state';
 import { Product } from '../../products';
 import { Store } from '@ngrx/store';
-import { CartItemState } from 'src/app/components/product-details/state/product.state';
-import { addProduct } from 'src/app/components/product-details/state/product.actions';
-import { CartItemModel } from 'src/app/components/product-details/state/product.model';
+import { addBook, removeBook } from 'src/app/components/shopping-cart/state/cart.actions';
+import { CartState } from 'src/app/components/shopping-cart/state/cart.state';
+import * as BookActions from "../../components/shopping-cart/state/cart.actions"
 
 export type CartItemType = {
   productId: number,
@@ -22,7 +23,7 @@ export class CartService {
   private cartItems?: CartItemType[] = [];
   private totalCost: number = 0;
 
-  constructor(private store: Store<CartItemState>) { }
+  constructor(private store: Store<CartState>) { }
 
   public addToCart(product: Product, value: number): void {
     // let productInCart = false;
@@ -49,8 +50,16 @@ export class CartService {
     //     productCnt: value
     //   });
     // }
-    const item: CartItemModel = product;
-    this.store.dispatch(addProduct({item}))
+    let book = {
+        productId: product.id,
+        productName: product.name,
+        productPrice: product.price,
+        productDesc: product.description!,
+        productImg: product.imgPath,
+        productImgAlt: product.imgAlt,
+        productCnt: value
+    }
+    this.store.dispatch(addBook({ book }));
   }
 
   public getItems(): CartItemType[] {
@@ -62,12 +71,14 @@ export class CartService {
     return this.cartItems;
   }
 
-  public deleteItem(productId: number): void {
-    this.cartItems!.forEach((element, index) => {
-      if(element.productId === productId) {
-        this.cartItems!.splice(index, 1);
-      }
-    }); 
+  public deleteItem(bookId: number): void {
+    this.store.dispatch(removeBook({ bookId }));
+    // this.store.dispatch(new BookActions.RemoveBook(bookId));
+    // this.cartItems!.forEach((element, index) => {
+    //   if(element.productId === productId) {
+    //     this.cartItems!.splice(index, 1);
+    //   }
+    // }); 
   }
 
   public getTotalCost(): number {

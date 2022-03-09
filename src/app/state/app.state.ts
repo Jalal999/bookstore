@@ -2,7 +2,7 @@ import { ProductListState } from "../components/product-list/state/product-list.
 
 import { productReducer } from "../components/product-list/state/product-list.reducer";
 import { CartState } from "../components/shopping-cart/state/cart.state";
-import { collectionReducer } from "../components/shopping-cart/state/cart.reducer";
+import { cartReducer } from "../components/shopping-cart/state/cart.reducer";
 
 export interface AppState {
     ProductListState: ProductListState,
@@ -11,5 +11,5 @@ export interface AppState {
 
 export const AppReducer = {
     product: productReducer,
-    items: collectionReducer
+    items: cartReducer
 }

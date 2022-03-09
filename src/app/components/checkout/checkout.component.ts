@@ -12,11 +12,11 @@ import { CartItemType } from '../../services/cart-service/cart.service';
   styleUrls: ['./checkout.component.less']
 })
 export class CheckoutComponent {
-  public items = this.cartService.getItems();
+  items$ = this.cartService.getItems();
   public totalCost = this.cartService.getTotalCost();
   private emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]+$/;
 
-  private orders: CartItemType[] = this.items;
+  // private orders: CartItemType[] = this.items$;
 
   constructor(private cartService: CartService, public thankDialog: MatDialog, private orderService: OrderService) { }
 
@@ -37,9 +37,9 @@ export class CheckoutComponent {
   }
 
   public onSubmit() {
-    this.orderService.saveOrder(this.items);
+    this.orderService.saveOrder(this.items$);
     this.thankDialog.open(ThankDialogComponent);
-    this.items = this.cartService.clearCart();
+    this.items$ = this.cartService.clearCart();
   };
 
   public hasError(errorKey: string): boolean {

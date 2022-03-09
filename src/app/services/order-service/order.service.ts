@@ -18,7 +18,7 @@ export class OrderService {
 
   constructor(private http: HttpClient) { }
 
-  saveOrder(order: CartItemType[]): Observable<CartItemType[]> {
+  saveOrder(order: Observable<CartItemType[]>): Observable<CartItemType[]> {
     return this.http.post<CartItemType[]>(this.ordersUrl, order, this.httpOptions);
   }
 }

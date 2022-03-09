@@ -1,4 +1,4 @@
-<div class="shopping-cart" >
+<div class="shopping-cart" *ngIf="isCartNotEmpty(); else emptyCart">
     <mat-card *ngFor="let item of items$ | async" class="shopping-cart__item">
         <img mat-card-md-image src={{item.productImg}} alt="{{item.productImgAlt}}" class="shopping-cart__item__image">
         <div class="shopping-cart__item__heading">
@@ -23,4 +23,3 @@
 <ng-template #emptyCart>
     <p>Cart is empty!</p>
 </ng-template>
-<!-- <p *ngFor="let item of items$ | async">{{item.productName}}</p> -->

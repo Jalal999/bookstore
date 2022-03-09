@@ -1,19 +1,34 @@
 import { createReducer, on } from '@ngrx/store';
-import { addBook, retrievedBookList, removeBook } from './cart.actions';
+import { addBook, removeBook, updateCart } from './cart.actions';
 import { CartItemModel } from './cart.model';
 
 export let initialState: CartItemModel[] = [];
 
-const _collectionReducer = createReducer(
+const _cartReducer = createReducer(
     initialState,
     on(addBook, (state, { book }) => {
         let productInCart = false;
         for (let i = 0; i < state.length; i++) {
             if (state[i].productId === book.productId) {
-                console.log(state[i].productName + " " + state[i].productCnt);
-                state[i].productCnt = state[i].productCnt + book.productCnt;
+                let newState: CartItemModel[] = [];
+                for (let k = 0; k < state.length; k++){
+                    if (i !== k){
+                        newState.push(state[k])
+                    } else {
+                        newState.push({
+                            productId: state[k].productId,
+                            productName: state[k].productName,
+                            productPrice: state[k].productPrice, 
+                            productDesc: state[k].productDesc,
+                            productImg: state[k].productImg,
+                            productImgAlt: state[k].productImgAlt,
+                            productCnt: Number(state[k].productCnt)+Number(book.productCnt)
+                        })
+                    }
+                }
                 productInCart = true;
-                return {...state};
+
+                return [...newState];
                 break;
             }
         }
@@ -30,33 +45,30 @@ const _collectionReducer = createReducer(
         }
     }),
     on(removeBook, (state, { bookId }) => {
-        // let newState: CartItemModel[] = [...state]
-        // state.forEach((element, index) => {
-        //     if(element.productId === bookId) {
-        //         console.log(index)
-        //         deleteIndex = index
-        //         // const newState = state.splice(index, 1);
-        //         // return newState;
-        //     }
-        // }); 
         const newState = [...state].filter(item => item.productId !== bookId);
         return newState;
+    }),
+    on(updateCart, (state, { bookId, count }) => {
+        let newState: CartItemModel[] = [];
+        for (let i = 0; i < state.length; i++) {
+            if(i !== bookId) {
+                newState.push(state[i])
+            } else {
+                newState.push({
+                    productId: state[i].productId,
+                    productName: state[i].productName,
+                    productPrice: state[i].productPrice, 
+                    productDesc: state[i].productDesc,
+                    productImg: state[i].productImg,
+                    productImgAlt: state[i].productImgAlt,
+                    productCnt: count
+                })
+            }
+        }
+        return [...newState]
     })
-    //   on(retrievedBookList, (state, { books }) => books)
 );
 
-// export function reducer(state = [initialState], action: Action) {
-//     const tutorialAction = action as BookActions.Actions; 
-//     switch(tutorialAction.type) {
-//         case BookActions.REMOVE_BOOK:
-//             state.splice(tutorialAction.payload, 1);
-//             return state;
-//         default:
-//             return state;
-//     }
-// }
-
-export function collectionReducer(state: any, actions: any) {
-    return _collectionReducer(state, actions)
+export function cartReducer(state: any, actions: any) {
+    return _cartReducer(state, actions)
 }
-

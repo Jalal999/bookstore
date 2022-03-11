@@ -51,7 +51,7 @@ const _cartReducer = createReducer(
     on(updateCart, (state, { bookId, count }) => {
         let newState: CartItemModel[] = [];
         for (let i = 0; i < state.length; i++) {
-            if(i !== bookId) {
+            if(state[i].productId !== bookId) {
                 newState.push(state[i])
             } else {
                 newState.push({

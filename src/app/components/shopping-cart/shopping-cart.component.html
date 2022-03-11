@@ -6,11 +6,12 @@
                 <mat-card-title class="shopping-cart__item__name">{{ item.productName }}</mat-card-title>
                 <mat-icon (click)=deleteItem(item.productId)>close</mat-icon>
             </mat-card-title-group>
+            {{getCurrentCnt(item.productId)}}
             <form>
                 <mat-card-title class="shopping-cart__item__price">${{ item.productPrice }}</mat-card-title>
-                <input matInput type="number" min="1" id="amount" name="amount" [(ngModel)]="item.productCnt"
-                    (ngModelChange)="updateCart(item.productId, item.productCnt)" oninput="validity.valid||(value='');">
-            </form>
+                <input matInput type="number" min="1" id="amount" name="amount" [(ngModel)]="productAmount"
+                    (ngModelChange)="updateCart(item.productId, productAmount)" oninput="validity.valid||(value='');">
+            </form>            
         </div>
     </mat-card>
     <mat-divider></mat-divider>

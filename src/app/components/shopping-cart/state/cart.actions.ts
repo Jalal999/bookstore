@@ -18,3 +18,7 @@ export const updateCart = createAction(
     '[Book] UPDATE CART',
     props<{ bookId: number, count: number}>()
 )
+
+export const clearCart = createAction(
+    '[Book] CLEAR CART'
+)

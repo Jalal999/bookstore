@@ -3,7 +3,7 @@ import { Product } from '../../products';
 import { Store, select } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { allItems } from 'src/app/components/shopping-cart/state/cart.selectors';
-import { addBook, removeBook, updateCart } from 'src/app/components/shopping-cart/state/cart.actions';
+import { addBook, removeBook, updateCart, clearCart } from 'src/app/components/shopping-cart/state/cart.actions';
 import { CartState } from 'src/app/components/shopping-cart/state/cart.state';
 
 export type CartItemType = {
@@ -43,9 +43,10 @@ export class CartService {
     return this.items$;
   }
 
-  public clearCart(): Observable<CartItemType[]> {
-    this.items$ = of([]);
-    return this.items$;
+  public clearCart() {
+    // this.items$ = of([]);
+    // return this.items$;
+    this.store.dispatch(clearCart());
   }
 
   public deleteItem(bookId: number): void {

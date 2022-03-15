@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { addBook, removeBook, updateCart } from './cart.actions';
+import { addBook, clearCart, removeBook, updateCart } from './cart.actions';
 import { CartItemModel } from './cart.model';
 
 export let initialState: CartItemModel[] = [];
@@ -12,7 +12,7 @@ const _cartReducer = createReducer(
             if (state[i].productId === book.productId) {
                 let newState: CartItemModel[] = [];
                 for (let k = 0; k < state.length; k++){
-                    if (i !== k){
+                    if (i !== k) {
                         newState.push(state[k])
                     } else {
                         newState.push({
@@ -34,11 +34,26 @@ const _cartReducer = createReducer(
         }
 
         if (!productInCart) {
-              if (book.productCnt === 0) {
-                book.productCnt = 1;
+              if (book.productCnt === 0 || book.productCnt === null) {
+                let newState: CartItemModel[] = [];
+                for (let i = 0; i < state.length; i++){
+                    newState.push(state[i])
+                }
+                newState.push({
+                    productId: book.productId,
+                    productName: book.productName,
+                    productPrice: book.productPrice, 
+                    productDesc: book.productDesc,
+                    productImg: book.productImg,
+                    productImgAlt: book.productImgAlt,
+                    productCnt: 1
+                }) 
+                productInCart = true;
+                return [...newState];
+              } else {
+                    productInCart = true;
+                  return [...state, book]
               }
-              productInCart = true;
-            return [...state, book];
         }
         else {
             return [...state, book];
@@ -66,6 +81,9 @@ const _cartReducer = createReducer(
             }
         }
         return [...newState]
+    }),
+    on(clearCart, ( state ) => {
+        return [];
     })
 );
 

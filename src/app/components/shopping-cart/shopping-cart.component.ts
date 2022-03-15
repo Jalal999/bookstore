@@ -14,6 +14,7 @@ export class ShoppingCartComponent {
   items$ = this.store.pipe(select(allItems));
   public totalCost = this.cartService.getTotalCost();
   public productAmount = 0;
+  public numOfItems = 0;
 
   constructor(private cartService: CartService, private store: Store<CartState>) { }
 
@@ -28,7 +29,13 @@ export class ShoppingCartComponent {
   }
 
   public isCartNotEmpty(): boolean {
-    return this.totalCost === 0 ? false : true;
+    this.numOfItems = 0;
+    this.items$.subscribe((data) => {
+      data.forEach((element)=> {
+        this.numOfItems += 1;
+      })
+    })
+    return this.numOfItems === 0 && this.totalCost === 0 ? false : true;
   }
 
   public getCurrentCnt(productId: number) {

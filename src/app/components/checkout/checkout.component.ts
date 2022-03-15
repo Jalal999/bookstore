@@ -39,7 +39,7 @@ export class CheckoutComponent {
   public onSubmit() {
     this.orderService.saveOrder(this.items$);
     this.thankDialog.open(ThankDialogComponent);
-    this.items$ = this.cartService.clearCart();
+    this.cartService.clearCart();
   };
 
   public hasError(errorKey: string): boolean {

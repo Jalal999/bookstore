@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { CartService } from '../../services/cart-service/cart.service';
+import { Store, select } from '@ngrx/store';
+import { CartState } from './state/cart.state';
+import { allItems } from './state/cart.selectors';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -8,10 +11,12 @@ import { CartService } from '../../services/cart-service/cart.service';
 })
 export class ShoppingCartComponent {
 
-  public items = this.cartService.getItems();
+  items$ = this.store.pipe(select(allItems));
   public totalCost = this.cartService.getTotalCost();
+  public productAmount = 0;
+  public numOfItems = 0;
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService, private store: Store<CartState>) { }
 
   public deleteItem(productId: number): void {
     this.cartService.deleteItem(productId);
@@ -24,6 +29,21 @@ export class ShoppingCartComponent {
   }
 
   public isCartNotEmpty(): boolean {
-    return this.items.length > 0 ? true : false
+    this.numOfItems = 0;
+    this.items$.subscribe((data) => {
+      data.forEach((element)=> {
+        this.numOfItems += 1;
+      })
+    })
+    return this.numOfItems === 0 && this.totalCost === 0 ? false : true;
   }
+
+  public getCurrentCnt(productId: number) {
+    this.items$.subscribe((data) => {
+      data.forEach((element) => {
+        element.productId === productId ? this.productAmount = element.productCnt : this.productAmount
+      })
+    })
+  }
+
 }

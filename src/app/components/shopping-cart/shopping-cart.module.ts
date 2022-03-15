@@ -10,6 +10,8 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { ShoppingCartRoutingModule } from './shopping-cart-routing.module';
 import { ShoppingCartComponent } from './shopping-cart.component';
+import { cartReducer } from './state/cart.reducer';
+import { StoreModule } from '@ngrx/store';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { ShoppingCartComponent } from './shopping-cart.component';
     FormsModule, 
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatButtonModule
+    MatButtonModule,
+    StoreModule.forFeature('items', cartReducer),
+
   ]
 })
 export class ShoppingCartModule { }

@@ -1,5 +1,5 @@
 <div class="checkout">
-    <mat-card *ngFor = "let item of items" class="checkout__item">
+    <mat-card *ngFor = "let item of items$ | async" class="checkout__item">
         <div class="checkout__item__heading">
             <img mat-card-sm-image src={{item.productImg}} alt={{item.productImgAlt}} class="shopping-cart__item__image">
             <mat-card-title>{{ item.productName }}</mat-card-title>

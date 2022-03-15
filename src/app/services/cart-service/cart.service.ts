@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../../products';
+import { Store, select } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
+import { allItems } from 'src/app/components/shopping-cart/state/cart.selectors';
+import { addBook, removeBook, updateCart, clearCart } from 'src/app/components/shopping-cart/state/cart.actions';
+import { CartState } from 'src/app/components/shopping-cart/state/cart.state';
 
 export type CartItemType = {
   productId: number,
@@ -17,25 +22,12 @@ export type CartItemType = {
 export class CartService {
   private cartItems?: CartItemType[] = [];
   private totalCost: number = 0;
+  items$ = this.store.pipe(select(allItems));
 
-  constructor() { }
+  constructor(private store: Store<CartState>) { }
 
   public addToCart(product: Product, value: number): void {
-    let productInCart = false;
-
-    for (let i=0; i < this.cartItems!.length; i++) {
-      if (this.cartItems![i].productId === product.id) {
-        this.cartItems![i].productCnt += value;
-        productInCart = true;
-        break;
-      }
-    }
-
-    if (!productInCart) {
-      if (value === 0) {
-        value = 1;
-      }
-      this.cartItems?.push({
+    let book = {
         productId: product.id,
         productName: product.name,
         productPrice: product.price,
@@ -43,40 +35,37 @@ export class CartService {
         productImg: product.imgPath,
         productImgAlt: product.imgAlt,
         productCnt: value
-      });
     }
+    this.store.dispatch(addBook({ book }));
   }
 
-  public getItems(): CartItemType[] {
-    return this.cartItems!;
+  public getItems(): Observable<CartItemType[]> {
+    return this.items$;
   }
 
-  public clearCart(): CartItemType[] {
-    this.cartItems = [];
-    return this.cartItems;
+  public clearCart() {
+    // this.items$ = of([]);
+    // return this.items$;
+    this.store.dispatch(clearCart());
   }
 
-  public deleteItem(productId: number): void {
-    this.cartItems!.forEach((element, index) => {
-      if(element.productId === productId) {
-        this.cartItems!.splice(index, 1);
-      }
-    }); 
+  public deleteItem(bookId: number): void {
+    this.store.dispatch(removeBook({ bookId }));
   }
 
   public getTotalCost(): number {
     this.totalCost = 0;
-    this.cartItems!.forEach((element) => {
-      this.totalCost += element.productCnt*element.productPrice;
+    
+    this.items$.subscribe((data) => {
+      data.forEach((element) => {
+        this.totalCost += element.productCnt*element.productPrice;
+      })
     })
+
     return this.totalCost;
   }
 
-  public updateCart(id: number, count: number): void {
-    this.cartItems!.forEach((element) => {
-      if (element.productId === id) {
-        element.productCnt = count;
-      }
-    })
+  public updateCart(bookId: number, count: number): void {
+    this.store.dispatch(updateCart({ bookId, count }));
   }
 }

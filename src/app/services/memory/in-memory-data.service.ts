@@ -7,7 +7,7 @@ import { Product } from '../../products';
 })
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
-    const products = [
+    const books = [
       {
         id: 1,
         name: 'Learn React',
@@ -36,6 +36,6 @@ export class InMemoryDataService implements InMemoryDbService {
     const orders = [
       {}
     ];
-    return {products, orders};
+    return {books, orders};
   }
 }

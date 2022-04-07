@@ -27,6 +27,10 @@ export class CartService {
   constructor(private store: Store<CartState>) { }
 
   public addToCart(product: Product, value: number): void {
+    if (value === 0 || value === null) {
+      value = 1;
+    }
+    
     let book = {
         productId: product.id,
         productName: product.name,

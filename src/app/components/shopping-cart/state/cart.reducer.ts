@@ -1,64 +1,56 @@
 import { ActionReducer, createReducer, INIT, on, UPDATE } from '@ngrx/store';
 import { addBook, clearCart, removeBook, updateCart } from './cart.actions';
 import { CartItemModel } from './cart.model';
+import { itemRootSelector } from './cart.selectors';
+import { CartState } from './cart.state';
 
 export let initialState: CartItemModel[] = [];
 
 const _cartReducer = createReducer(
     initialState,
     on(addBook, (state, { book }) => {
-        let productInCart = false;
         let newState: CartItemModel[] = [];
+        let currentState: CartItemModel[]=state.map((item) => { return item });
+        let productInCart = false;
 
-        if (state.length > 0){
-            for (let i = 0; i < state.length; i++) {
-                if (state[i].productId !== book.productId) {
-                    newState.push(state[i]);
-                } else {
-                    productInCart = true;
-                    newState.push({
-                        productId: state[i].productId,
-                        productName: state[i].productName,
-                        productPrice: state[i].productPrice, 
-                        productDesc: state[i].productDesc,
-                        productImg: state[i].productImg,
-                        productImgAlt: state[i].productImgAlt,
-                        productCnt: Number(state[i].productCnt)+Number(book.productCnt)
-                    })
-                }
-            }
-            if (!productInCart) {
-                return [...newState, book];  
-            } else {
-                return newState;
-            }
+        if (state.length < 1) {
+            return [...state, book]
         } else {
-            return [...state, book];
-        }
-        
+            currentState.map((item) => {
+                let updatedItem;
+                if(item.productId === book.productId) {
+                    updatedItem = {...item, productCnt: Number(book.productCnt)+Number(item.productCnt)};
+                    newState.push(updatedItem)
+                    productInCart = true;
+                } else {
+                    newState.push(item);
+                }
+            })
 
+            if (productInCart) {
+                currentState = [...newState]
+                return [...newState]
+            } else {
+                currentState = [...newState, book]
+                return [...newState, book]
+            }
+        }
     }),
     on(removeBook, (state, { bookId }) => {
         const newState = [...state].filter(item => item.productId !== bookId);
         return newState;
     }),
-    on(updateCart, (state, { bookId, count }) => {
+    on(updateCart, (state,  { bookId, count }) => {
         let newState: CartItemModel[] = [];
-        for (let i = 0; i < state.length; i++) {
-            if(state[i].productId !== bookId) {
-                newState.push(state[i])
+        state.map((item) => {
+            let updatedItem;
+            if (item.productId === bookId) {
+                updatedItem = {...item, productCnt: count} 
+                newState.push(updatedItem)
             } else {
-                newState.push({
-                    productId: state[i].productId,
-                    productName: state[i].productName,
-                    productPrice: state[i].productPrice, 
-                    productDesc: state[i].productDesc,
-                    productImg: state[i].productImg,
-                    productImgAlt: state[i].productImgAlt,
-                    productCnt: count
-                })
-            }
-        }
+                newState.push(item)
+            } 
+        })
         return [...newState]
     }),
     on(clearCart, _ => [])

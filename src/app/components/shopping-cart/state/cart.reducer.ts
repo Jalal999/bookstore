@@ -9,49 +9,62 @@ export let initialState: CartItemModel[] = [];
 const _cartReducer = createReducer(
     initialState,
     on(addBook, (state, { book }) => {
-        let newState: CartItemModel[] = [];
-        let currentState: CartItemModel[]=state.map((item) => { return item });
-        let productInCart = false;
+        // let newState: CartItemModel[] = [];
+        // let currentState: CartItemModel[]=state.map((item) => { return item });
+        // let productInCart = false;
+        // console.log(state)
 
-        if (state.length < 1) {
-            return [...state, book]
-        } else {
-            currentState.map((item) => {
-                let updatedItem;
-                if(item.productId === book.productId) {
-                    updatedItem = {...item, productCnt: Number(book.productCnt)+Number(item.productCnt)};
-                    newState.push(updatedItem)
-                    productInCart = true;
-                } else {
-                    newState.push(item);
-                }
-            })
+        // if (state.length < 1) {
+        //     return [...state, book]
+        // } else {
+        //     console.log(state)
+        //     currentState.map((item) => {
+        //         let updatedItem;
+        //         if(item.productId === book.productId) {
+        //             updatedItem = {...item, productCnt: Number(book.productCnt)+Number(item.productCnt)};
+        //             newState.push(updatedItem)
+        //             productInCart = true;
+        //         } else {
+        //             newState.push(item);
+        //         }
+        //     })
 
-            if (productInCart) {
-                currentState = [...newState]
-                return [...newState]
-            } else {
-                currentState = [...newState, book]
-                return [...newState, book]
-            }
-        }
+        //     if (productInCart) {
+        //         currentState = [...newState]
+        //         return [...newState]
+        //     } else {
+        //         currentState = [...newState, book]
+        //         return [...newState, book]
+        //     }
+        // }
+        console.log(state)
+        const isBook = !!Object.entries(state).filter((item) => item[1].productId === book.productId).length
+        console.log("isBook: " + isBook + ";;;; state: " + state)
+        return isBook ? [...state] : [...state, book]
     }),
     on(removeBook, (state, { bookId }) => {
         const newState = [...state].filter(item => item.productId !== bookId);
         return newState;
     }),
     on(updateCart, (state,  { bookId, count }) => {
-        let newState: CartItemModel[] = [];
-        state.map((item) => {
-            let updatedItem;
-            if (item.productId === bookId) {
-                updatedItem = {...item, productCnt: count} 
-                newState.push(updatedItem)
-            } else {
-                newState.push(item)
-            } 
-        })
-        return [...newState]
+        // let newState: CartItemModel[] = [];
+        // state.map((item) => {
+        //     let updatedItem;
+        //     if (item.productId === bookId) {
+        //         updatedItem = {...item, productCnt: count} 
+        //         newState.push(updatedItem)
+        //     } else {
+        //         newState.push(item)
+        //     } 
+        // })
+        // return [...newState]
+        return [
+            ...state.map((item) => 
+                item.productId === bookId
+                ? {...item, productCnt: count }
+                : { ...item }
+            ),
+        ]
     }),
     on(clearCart, _ => [])
 );

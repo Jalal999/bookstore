@@ -31,7 +31,8 @@ export class ShoppingCartComponent {
   public isCartNotEmpty(): boolean {
     this.numOfItems = 0;
     this.items$.subscribe((data) => {
-      data.forEach((element)=> {
+      let values = Object.values(data)
+      values.forEach((element)=> {
         this.numOfItems += 1;
       })
     })
@@ -40,8 +41,9 @@ export class ShoppingCartComponent {
 
   public getCurrentCnt(productId: number) {
     this.items$.subscribe((data) => {
-      data.forEach((element) => {
-        element.productId === productId ? this.productAmount = element.productCnt : this.productAmount
+      let values = Object.entries(data)
+      values.forEach((element) => {
+        element[1].productId === productId ? this.productAmount = element[1].productCnt : this.productAmount
       })
     })
   }

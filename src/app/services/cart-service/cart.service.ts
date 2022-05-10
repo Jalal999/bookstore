@@ -44,7 +44,7 @@ export class CartService {
   }
 
   public getItems(): Observable<CartItemType[]> {
-    return this.items$;
+    return this.items$.pipe();
   }
 
   public clearCart() {
@@ -60,12 +60,13 @@ export class CartService {
   public getTotalCost(): number {
     this.totalCost = 0;
     
-    this.items$.subscribe((data) => {
-      data.forEach((element) => {
-        this.totalCost += element.productCnt*element.productPrice;
+    this.items$.pipe().subscribe((data) => {
+      let values = Object.entries(data)
+      values.map((element) => {
+        console.log("element " + element[1].productCnt)
+        this.totalCost += Number(element[1].productCnt)*Number(element[1].productPrice);
       })
     })
-
     return this.totalCost;
   }
 

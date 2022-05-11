@@ -61,7 +61,7 @@ export class CartService {
     this.totalCost = 0;
     
     this.items$.pipe().subscribe((data) => {
-      let values = Object.entries(data)
+      const values = Object.entries(data)
       values.map((element) => {
         console.log("element " + element[1].productCnt)
         this.totalCost += Number(element[1].productCnt)*Number(element[1].productPrice);

@@ -48,8 +48,6 @@ export class CartService {
   }
 
   public clearCart() {
-    // this.items$ = of([]);
-    // return this.items$;
     this.store.dispatch(clearCart());
   }
 
@@ -63,7 +61,6 @@ export class CartService {
     this.items$.pipe().subscribe((data) => {
       const values = Object.entries(data)
       values.map((element) => {
-        console.log("element " + element[1].productCnt)
         this.totalCost += Number(element[1].productCnt)*Number(element[1].productPrice);
       })
     })

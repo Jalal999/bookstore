@@ -27,6 +27,10 @@ export class CartService {
   constructor(private store: Store<CartState>) { }
 
   public addToCart(product: Product, value: number): void {
+    if (value === 0 || value === null) {
+      value = 1;
+    }
+    
     let book = {
         productId: product.id,
         productName: product.name,
@@ -40,12 +44,10 @@ export class CartService {
   }
 
   public getItems(): Observable<CartItemType[]> {
-    return this.items$;
+    return this.items$.pipe();
   }
 
   public clearCart() {
-    // this.items$ = of([]);
-    // return this.items$;
     this.store.dispatch(clearCart());
   }
 
@@ -56,12 +58,12 @@ export class CartService {
   public getTotalCost(): number {
     this.totalCost = 0;
     
-    this.items$.subscribe((data) => {
-      data.forEach((element) => {
-        this.totalCost += element.productCnt*element.productPrice;
+    this.items$.pipe().subscribe((data) => {
+      const values = Object.entries(data)
+      values.map((element) => {
+        this.totalCost += Number(element[1].productCnt)*Number(element[1].productPrice);
       })
     })
-
     return this.totalCost;
   }
 

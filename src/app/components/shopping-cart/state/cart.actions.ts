@@ -2,12 +2,10 @@ import { createAction, props } from '@ngrx/store';
 import { CartItemModel } from './cart.model';
 
 
-export const REMOVE_BOOK = "[Book] Remove Book";
-
 export const addBook = createAction(
     '[Book List] Add Book',
     props<{ book: CartItemModel }>()
-  );
+);
 
 export const removeBook = createAction(
     '[Book] Remove Book',

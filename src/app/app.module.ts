@@ -15,6 +15,7 @@ import { AppReducer } from './state/app.state';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { metaReducerLocalStorage } from './components/shopping-cart/state/cart.reducer';
 
 
 @NgModule({
@@ -36,7 +37,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
     ),
-    StoreModule.forRoot( AppReducer ),
+    StoreModule.forRoot( AppReducer, { metaReducers: [ metaReducerLocalStorage]} ),
   ],
   providers: [],
   bootstrap: [AppComponent]

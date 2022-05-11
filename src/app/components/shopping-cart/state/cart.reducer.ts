@@ -4,7 +4,7 @@ import { CartItemModel } from './cart.model';
 import { itemRootSelector } from './cart.selectors';
 import { CartState } from './cart.state';
 
-export let initialState: CartItemModel[] = [];
+const initialState: CartItemModel[] = [];
 
 const _cartReducer = createReducer(
     initialState,
@@ -13,8 +13,7 @@ const _cartReducer = createReducer(
         return isBook ? [...state] : [...state, book]
     }),
     on(removeBook, (state, { bookId }) => {
-        const newState = [...state].filter(item => item.productId !== bookId);
-        return newState;
+        return [...state].filter(item => item.productId !== bookId);
     }),
     on(updateCart, (state,  { bookId, count }) => {
         return [
